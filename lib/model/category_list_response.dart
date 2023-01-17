@@ -1,13 +1,13 @@
-class QuoteListResponse {
+class CategoryListResponse {
   Success? success;
   Contents? contents;
   String? baseurl;
   Copyright? copyright;
 
-  QuoteListResponse(
+  CategoryListResponse(
       {this.success, this.contents, this.baseurl, this.copyright});
 
-  QuoteListResponse.fromJson(Map<dynamic, dynamic> json) {
+  CategoryListResponse.fromJson(Map<dynamic, dynamic> json) {
     success =
     json['success'] != null ? new Success.fromJson(json['success']) : null;
     contents = json['contents'] != null
@@ -52,81 +52,57 @@ class Success {
 }
 
 class Contents {
-  List<Quotes>? quotes;
+  List<Categories>? categories;
 
-  Contents({this.quotes});
+  Contents({this.categories});
 
   Contents.fromJson(Map<String, dynamic> json) {
-    if (json['quotes'] != null) {
-      quotes = <Quotes>[];
-      json['quotes'].forEach((v) {
-        quotes!.add(new Quotes.fromJson(v));
+    if (json['categories'] != null) {
+      categories = <Categories>[];
+      json['categories'].forEach((v) {
+        categories!.add(new Categories.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.quotes != null) {
-      data['quotes'] = this.quotes!.map((v) => v.toJson()).toList();
+    if (this.categories != null) {
+      data['categories'] = this.categories!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Quotes {
-  String? quote;
-  String? length;
-  String? author;
-  List<String>? tags;
-  String? category;
-  String? language;
-  String? date;
-  String? permalink;
-  String? id;
-  String? background;
+class Categories {
+  String? name;
   String? title;
+  String? description;
+  String? language;
+  String? background;
 
-  Quotes(
-      {this.quote,
-        this.length,
-        this.author,
-        this.tags,
-        this.category,
+  Categories(
+      {this.name,
+        this.title,
+        this.description,
         this.language,
-        this.date,
-        this.permalink,
-        this.id,
-        this.background,
-        this.title});
+        this.background});
 
-  Quotes.fromJson(Map<String, dynamic> json) {
-    quote = json['quote'];
-    length = json['length'];
-    author = json['author'];
-    tags = json['tags'].cast<String>();
-    category = json['category'];
-    language = json['language'];
-    date = json['date'];
-    permalink = json['permalink'];
-    id = json['id'];
-    background = json['background'];
+  Categories.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
     title = json['title'];
+    description = json['description'];
+    language = json['language'];
+    background = json['background'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['quote'] = this.quote;
-    data['length'] = this.length;
-    data['author'] = this.author;
-    data['tags'] = this.tags;
-    data['category'] = this.category;
-    data['language'] = this.language;
-    data['date'] = this.date;
-    data['permalink'] = this.permalink;
-    data['id'] = this.id;
-    data['background'] = this.background;
+    data['name'] = this.name;
     data['title'] = this.title;
+    data['description'] = this.description;
+    data['language'] = this.language;
+    data['background'] = this.background;
     return data;
   }
 }
