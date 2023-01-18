@@ -33,52 +33,54 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           builder: (context, CategoriesViewModel viewModel, _) {
             return Column(
               children: [
-                AnimationLimiter(
-                  child: ListView.builder(
-                  shrinkWrap: true,
-                    itemCount: viewModel.categories?.length ?? 0,
-                    itemBuilder: (BuildContext context, int index) {
-                      return AnimationConfiguration.staggeredList(
-                        position: index,
-                        duration: const Duration(milliseconds: 1000),
-                        child: SlideAnimation(
-                          verticalOffset: 100.0,
-                          child: FadeInAnimation(
-                            child: InkWell(
-                              child: CategoryItem(model: viewModel.categories![index],),
-                              onTap: () {
-                                pushPage(context, ListQuoteScreen(
-                                  categories: viewModel.categories![index],
-                                ));
-                              },
+                Expanded(
+                  child: AnimationLimiter(
+                    child: ListView.builder(
+                    shrinkWrap: true,
+                      itemCount: viewModel.categories?.length ?? 0,
+                      itemBuilder: (BuildContext context, int index) {
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: const Duration(milliseconds: 1000),
+                          child: SlideAnimation(
+                            verticalOffset: 100.0,
+                            child: FadeInAnimation(
+                              child: InkWell(
+                                child: CategoryItem(model: viewModel.categories![index],),
+                                onTap: () {
+                                  pushPage(context, ListQuoteScreen(
+                                    categories: viewModel.categories![index],
+                                  ));
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
-                  )
+                        );
+                      }
+                    )
+                  ),
                 ),
                 Visibility(
                   visible: viewModel.erro?.isNotEmpty ?? false,
                   child: Text(viewModel.erro ?? "")
                 ),
-                DefaultTextStyle(
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                  ),
-                  child: AnimatedTextKit(
-                    animatedTexts: [
-                      WavyAnimatedText(
-                        viewModel.erro ?? "",
-                        textStyle: TextStyle(color: Colors.amber)
-                      ),
-                    ],
-                    isRepeatingAnimation: true,
-                    onTap: () {
-                      print("Tap Event");
-                    },
-                  ),
-                )
+                // DefaultTextStyle(
+                //   style: const TextStyle(
+                //     fontSize: 20.0,
+                //   ),
+                //   child: AnimatedTextKit(
+                //     animatedTexts: [
+                //       WavyAnimatedText(
+                //         viewModel.erro ?? "",
+                //         textStyle: TextStyle(color: Colors.amber)
+                //       ),
+                //     ],
+                //     isRepeatingAnimation: true,
+                //     onTap: () {
+                //       print("Tap Event");
+                //     },
+                //   ),
+                // )
               ],
             );
           },
